@@ -13,7 +13,7 @@ var
     c21, c22, c23: real;        // Elemen-elemen hasil matriks 3x3
     c31, c32, c33: real;        // Elemen-elemen hasil matriks 3x3
     det: real;                  // Determinan matriks
-    inversible: boolean;        // Memeriksa apakah matriks memiliki invers
+    inversornot: boolean;        // Memeriksa apakah matriks memiliki invers
     f: text;                    // File untuk menyimpan hasil
     ukuran, pilihan: integer;   // Variabel untuk pilihan ukuran dan operasi
 
