@@ -1,1 +1,54 @@
+program Kalkulator_Matriks;
 
+uses crt;
+
+var
+    a11, a12, a13: real;        // Elemen-elemen matriks A 3x3
+    a21, a22, a23: real;        // Elemen-elemen matriks A 3x3
+    a31, a32, a33: real;        // Elemen-elemen matriks A 3x3
+    b11, b12, b13: real;        // Elemen-elemen matriks B 3x3
+    b21, b22, b23: real;        // Elemen-elemen matriks B 3x3
+    b31, b32, b33: real;        // Elemen-elemen matriks B 3x3
+    c11, c12, c13: real;        // Elemen-elemen hasil matriks 3x3
+    c21, c22, c23: real;        // Elemen-elemen hasil matriks 3x3
+    c31, c32, c33: real;        // Elemen-elemen hasil matriks 3x3
+    det: real;                  // Determinan matriks
+    inversible: boolean;        // Memeriksa apakah matriks memiliki invers
+    f: text;                    // File untuk menyimpan hasil
+    ukuran, pilihan: integer;   // Variabel untuk pilihan ukuran dan operasi
+
+procedure PilihMatriks(var ukuran: integer); // prosedur untuk memilih ukuran matriks apa 2x2 atau 3x3.
+begin
+    writeln('Pilih ukuran matriks:');
+    writeln('1. Matriks 2x2');
+    writeln('2. Matriks 3x3');
+    write('Masukkan pilihan (1 atau 2): '); readln(ukuran);
+    if (ukuran <> 1) and (ukuran <> 2) then // jika ukuran yang dipilih bukan 1 atau 2 maka pilihannya tidak valid
+    begin
+        writeln('Pilihan tidak valid.');
+        halt;
+    end;
+end;
+
+procedure PilihOperasi(var pilihan: integer); // setelah memilih ukuran dilanjutkan memilih operasi matriks apa.
+begin
+    writeln('Pilih operasi matriks:');
+    writeln('1. Penjumlahan Matriks');
+    writeln('2. Perkalian Matriks');
+    writeln('3. Determinan Matriks');
+    writeln('4. Invers Matriks');
+    write('Masukkan pilihan (1-4): '); readln(pilihan);
+    if (pilihan < 1) or (pilihan > 4) then // jika pilihannya tidak sesuai 1-4 maka pilihan tidak valid.
+    begin
+        writeln('Pilihan tidak valid.');
+        halt;
+    end;
+end;
+
+procedure InputMatriks2x2(var m11, m12, m21, m22: real); // jika memilih matriks 2x2 maka akan melakukan prosedur ini. yaitu untuk menginputkan angka pada matriks 2x2 tersebut.
+begin
+    write('Masukkan elemen [1,1]: '); readln(m11);
+    write('Masukkan elemen [1,2]: '); readln(m12);
+    write('Masukkan elemen [2,1]: '); readln(m21);
+    write('Masukkan elemen [2,2]: '); readln(m22);
+end;
