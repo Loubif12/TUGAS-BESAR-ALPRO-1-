@@ -113,3 +113,78 @@ begin
     c21 := a21 * b11 + a22 * b21;
     c22 := a21 * b12 + a22 * b22;
 end;
+procedure PerkalianMatriks3x3(a11, a12, a13, a21, a22, a23, a31, a32, a33: real;  // jika memilih operasi perkalian matriks maka prosedur ini akan jalan untuk matriks 3x3.
+                               b11, b12, b13, b21, b22, b23, b31, b32, b33: real;
+                               var c11, c12, c13, c21, c22, c23, c31, c32, c33: real);
+begin
+    c11 := a11 * b11 + a12 * b21 + a13 * b31;
+    c12 := a11 * b12 + a12 * b22 + a13 * b32;
+    c13 := a11 * b13 + a12 * b23 + a13 * b33;
+
+    c21 := a21 * b11 + a22 * b21 + a23 * b31;
+    c22 := a21 * b12 + a22 * b22 + a23 * b32;
+    c23 := a21 * b13 + a22 * b23 + a23 * b33;
+
+    c31 := a31 * b11 + a32 * b21 + a33 * b31;
+    c32 := a31 * b12 + a32 * b22 + a33 * b32;
+    c33 := a31 * b13 + a32 * b23 + a33 * b33;
+end;
+
+function Determinan2x2(a11, a12, a21, a22: real): real;  // jika memilih operasi determinan matriks maka function ini akan jalan untuk matriks 2x2.
+begin
+    Determinan2x2 := a11 * a22 - a12 * a21;
+end;
+
+function Determinan3x3(a11, a12, a13, a21, a22, a23, a31, a32, a33: real): real;  // jika memilih operasi determinan matriks maka function ini akan jalan untuk matriks 3x3.
+begin
+    Determinan3x3 := a11 * (a22 * a33 - a23 * a32) -
+                     a12 * (a21 * a33 - a23 * a31) +
+                     a13 * (a21 * a32 - a22 * a31);
+end;
+
+procedure InversMatriks2x2(a11, a12, a21, a22: real; var c11, c12, c21, c22: real; var inversornot: boolean); // jika memilih operasi invers matriks maka prosedur ini akan jalan untuk matriks 2x2.
+var
+    det: real;
+begin
+    det := Determinan2x2(a11, a12, a21, a22);
+    if det = 0 then
+    begin
+        inversornot := false; // digunakan tipe data boolean untuk memeriksa apakah det= 0 jika iya maka false/ tidak bisa operasi invers
+        exit;
+    end;
+
+    c11 := a22 / det;
+    c12 := -a12 / det;
+    c21 := -a21 / det;
+    c22 := a11 / det;
+
+    inversornot := true; 
+end;
+
+procedure InversMatriks3x3(a11, a12, a13, a21, a22, a23, a31, a32, a33: real; // jika memilih operasi invers matriks maka prosedur ini akan jalan untuk matriks 3x3
+                            var c11, c12, c13, c21, c22, c23, c31, c32, c33: real;
+                            var inversornot: boolean);
+var
+    det: real;
+begin
+    det := Determinan3x3(a11, a12, a13, a21, a22, a23, a31, a32, a33);
+    if det = 0 then // digunakan tipe data boolean untuk memeriksa apakah det= 0 jika iya maka false/ tidak bisa operasi invers
+    begin
+        inversornot := false;
+        exit;
+    end;
+
+    c11 := (a22 * a33 - a23 * a32) / det;
+    c12 := (a13 * a32 - a12 * a33) / det;
+    c13 := (a12 * a23 - a13 * a22) / det;
+
+    c21 := (a23 * a31 - a21 * a33) / det;
+    c22 := (a11 * a33 - a13 * a31) / det;
+    c23 := (a13 * a21 - a11 * a23) / det;
+
+    c31 := (a21 * a32 - a22 * a31) / det;
+    c32 := (a12 * a31 - a11 * a32) / det;
+    c33 := (a11 * a22 - a12 * a21) / det;
+
+    inversornot := true;
+end;
