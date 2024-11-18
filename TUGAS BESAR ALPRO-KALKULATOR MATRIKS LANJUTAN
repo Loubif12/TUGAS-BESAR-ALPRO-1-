@@ -19,19 +19,22 @@ var
 
 procedure PilihMatriks(var ukuran: integer); // prosedur untuk memilih ukuran matriks apa 2x2 atau 3x3.
 begin
+    repeat
     writeln('Pilih ukuran matriks:');
     writeln('1. Matriks 2x2');
     writeln('2. Matriks 3x3');
     write('Masukkan pilihan (1 atau 2): '); readln(ukuran);
     if (ukuran <> 1) and (ukuran <> 2) then // jika ukuran yang dipilih bukan 1 atau 2 maka pilihannya tidak valid
     begin
-        writeln('Pilihan tidak valid.');
-        halt;
+        writeln('Pilihan tidak valid. Coba lagi!');
     end;
+    until (ukuran = 1) or (ukuran = 2);
 end;
+
 
 procedure PilihOperasi(var pilihan: integer); // setelah memilih ukuran dilanjutkan memilih operasi matriks apa.
 begin
+    repeat 
     writeln('Pilih operasi matriks:');
     writeln('1. Penjumlahan Matriks');
     writeln('2. Perkalian Matriks');
@@ -40,9 +43,9 @@ begin
     write('Masukkan pilihan (1-4): '); readln(pilihan);
     if (pilihan < 1) or (pilihan > 4) then // jika pilihannya tidak sesuai 1-4 maka pilihan tidak valid.
     begin
-        writeln('Pilihan tidak valid.');
-        halt;
+        writeln('Pilihan tidak valid. Coba lagi!!');
     end;
+    until (pilihan = 1) or (pilihan = 2) or (pilihan = 3 ) or(pilihan = 4);
 end;
 
 procedure InputMatriks2x2(var m11, m12, m21, m22: real); // jika memilih matriks 2x2 maka akan melakukan prosedur ini. yaitu untuk menginputkan angka pada matriks 2x2 tersebut.
@@ -135,11 +138,16 @@ begin
     Determinan2x2 := a11 * a22 - a12 * a21;
 end;
 
-function Determinan3x3(a11, a12, a13, a21, a22, a23, a31, a32, a33: real): real;  // jika memilih operasi determinan matriks maka function ini akan jalan untuk matriks 3x3.
+function DeterminantRecursive3x3(a11, a12, a13, a21, a22, a23, a31, a32, a33: real): real;
+
 begin
-    Determinan3x3 := a11 * (a22 * a33 - a23 * a32) -
-                     a12 * (a21 * a33 - a23 * a31) +
-                     a13 * (a21 * a32 - a22 * a31);
+
+    DeterminantRecursive3x3 := a11 * (a22 * a33 - a23 * a32) -
+
+              a12 * (a21 * a33 - a23 * a31) +
+
+              a13 * (a21 * a32 - a22 * a31);
+
 end;
 
 procedure InversMatriks2x2(a11, a12, a21, a22: real; var c11, c12, c21, c22: real; var inversornot: boolean); // jika memilih operasi invers matriks maka prosedur ini akan jalan untuk matriks 2x2.
@@ -167,7 +175,7 @@ procedure InversMatriks3x3(a11, a12, a13, a21, a22, a23, a31, a32, a33: real; //
 var
     det: real;
 begin
-    det := Determinan3x3(a11, a12, a13, a21, a22, a23, a31, a32, a33);
+    det := Determinanrecursive3x3(a11, a12, a13, a21, a22, a23, a31, a32, a33);
     if det = 0 then // digunakan tipe data boolean untuk memeriksa apakah det= 0 jika iya maka false/ tidak bisa operasi invers
     begin
         inversornot := false;
