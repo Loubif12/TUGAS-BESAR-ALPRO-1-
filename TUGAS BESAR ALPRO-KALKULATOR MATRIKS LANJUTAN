@@ -196,3 +196,66 @@ begin
 
     inversornot := true;
 end;
+
+procedure ProsesOperasiMatriks; // proses untuk melakukan operasi matriks.
+var
+    c2x2: real;
+    c3x3: real;
+begin
+    assign(f, 'HasilOperasiMatriks.txt'); // assign file dengan nama 'hasiloperasimatriks.txt'
+    rewrite(f); //membuat file karena file belum ada.
+
+    { Melakukan operasi berdasarkan pilihan }
+    case pilihan of
+        1: if ukuran = 1 then 
+           begin
+               PenjumlahanMatriks2x2(a11, a12, a21, a22, b11, b12, b21, b22, c11, c12, c21, c22);
+               writeln(f, 'Hasil Penjumlahan Matriks A + B:');
+               Simpanmatriks2x2(f, c11, c12, c21, c22);
+           end
+           else
+           begin
+               PenjumlahanMatriks3x3(a11, a12, a13, a21, a22, a23, a31, a32, a33,
+                                     b11, b12, b13, b21, b22, b23, b31, b32, b33,
+                                     c11, c12, c13, c21, c22, c23, c31, c32, c33);
+               writeln(f, 'Hasil Penjumlahan Matriks A + B:');
+               Simpanmatriks3x3(f, c11, c12, c13, c21, c22, c23, c31, c32, c33);
+           end;
+
+        2: if ukuran = 1 then
+           begin
+               PerkalianMatriks2x2(a11, a12, a21, a22, b11, b12, b21, b22, c11, c12, c21, c22);
+               writeln(f, 'Hasil Perkalian Matriks A * B:');
+               Simpanmatriks2x2(f, c11, c12, c21, c22);
+           end
+           else
+           begin
+               PerkalianMatriks3x3(a11, a12, a13, a21, a22, a23, a31, a32, a33,
+                                   b11, b12, b13, b21, b22, b23, b31, b32, b33,
+                                   c11, c12, c13, c21, c22, c23, c31, c32, c33);
+               writeln(f, 'Hasil Perkalian Matriks A * B:');
+               Simpanmatriks3x3(f, c11, c12, c13, c21, c22, c23, c31, c32, c33);
+           end;
+
+        3: if ukuran = 1 then
+           begin
+               det := Determinan2x2(a11, a12, a21, a22);
+               writeln(f, 'Determinan Matriks A: ', det:0:2);
+           end
+           else
+           begin
+               det := Determinan3x3(a11, a12, a13, a21, a22, a23, a31, a32, a33);
+               writeln(f, 'Determinan Matriks A: ', det:0:2);
+           end;
+
+        4: if ukuran = 1 then
+           begin
+               InversMatriks2x2(a11, a12, a21, a22, c11, c12, c21, c22, inversornot);
+               if not inversornot then
+                   writeln(f, 'Matriks A tidak memiliki invers karena determinan = 0.')
+               else
+               begin
+                   writeln(f, 'Invers Matriks A:');
+                   Simpanmatriks2x2(f, c11, c12, c21, c22);
+               end;
+           end
